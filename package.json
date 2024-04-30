@@ -1,5 +1,5 @@
 {
-  "name": "generate-react-component",
+  "name": "generate-react-component-prompts",
   "version": "1.0.0",
   "description": "Generate react component with CLI",
   "main": "index.js",
