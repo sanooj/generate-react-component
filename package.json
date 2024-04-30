@@ -1,0 +1,29 @@
+{
+  "name": "generate-react-component",
+  "version": "1.0.0",
+  "description": "Generate react component with CLI",
+  "main": "index.js",
+  "files": "index.js",
+  "bin": {
+    "grc": "./index.js"
+  },
+  "scripts": {
+    "grc": "./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "generator",
+    "react",
+    "component",
+    "cli"
+  ],
+  "author": "Sanooj Hussain",
+  "license": "LGPL-2.1",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "fs-extra": "^11.2.0",
+    "program": "^1.0.0",
+    "prompts": "^2.4.2",
+    "yargs": "^17.7.2"
+  }
+}
