@@ -31,6 +31,14 @@ prompts.override(require("yargs").argv);
       initial: true,
     },
     {
+      type: "toggle",
+      name: "Test",
+      message: "Include Test?",
+      initial: true,
+      active: "yes",
+      inactive: "no",
+    },
+    {
       type: "select",
       name: "StylesheetType",
       message: "Select stylesheet Type?",
@@ -57,7 +65,7 @@ prompts.override(require("yargs").argv);
 })();
 
 function createComponent(options) {
-  const { ComponentName, ComponentType, StylesheetType, StylesheetModule, Pure } = options;
+  const { ComponentName, ComponentType, StylesheetType, StylesheetModule, Pure, Test } = options;
   const root = path.resolve(ComponentName);
   if (!StylesheetModule) {
     return true;
@@ -83,6 +91,13 @@ function createComponent(options) {
     `${ComponentName}${StylesheetModule ? ".module" : ""}.${StylesheetType}`,
   );
   fs.writeFileSync(cssFilePath, cssContent);
+
+  if (Test) {
+    const testContent = `import React from 'react';\nimport { render } from '@testing-library/react';\nimport ${ComponentName} from './${ComponentName}';\ntest('${ComponentName} Component', () => {
+    render(<${ComponentName} />);\n});`;
+    const testFilePath = path.join(root, `${ComponentName}.test.${ComponentType}`);
+    fs.writeFileSync(testFilePath, testContent);
+  }
 
   const componentFilePath = path.join(root, `${ComponentName}.${ComponentType}`);
   fs.writeFileSync(componentFilePath, Pure ? componentContent : classComponentContent);
